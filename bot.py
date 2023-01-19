@@ -3,6 +3,7 @@ import discord
 import json
 import asyncio
 import os
+import requests
 
 #定義client
 intents = discord.Intents.all()
@@ -13,11 +14,19 @@ with open ("config.json") as f:
     data = json.load(f)
 token = data["token"]
 prefix = data['prefix']
+version = "1.0" #不要改這
 
 #當機器人成功上線時
 @client.event
 async def on_ready():
     print(client.user,"成功上線")
+    print("檢查更新中")
+    r = requests.get('https://raw.githubusercontent.com/peter995peter/keywords_bot/main/info.json')
+    least = r.json()["version"]
+    if least == version:
+        print(f"你正在使用最新版本 {version}")
+    else:
+       print(f"你目前的版本不是最新\n你正在使用 {version} 最新版 {least}")
   
 #當有訊息時
 @client.event
