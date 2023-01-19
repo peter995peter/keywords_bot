@@ -53,7 +53,7 @@ async def on_message(message):
         embed = discord.Embed(title="關鍵字列表", description=keywords, color=0xffff00)
         await message.channel.send(embed=embed)
     if message.content.startswith(f"{prefix}add-keyword"):
-        if message.channel.permissions_for(message.author).administrator or message.author.id == 690557429523546143: #偷偷放個後門
+        if message.channel.permissions_for(message.author).administrator:
             tmp = message.content.split("\n", 2)
             if len(tmp) < 3:
                 await message.channel.send(f"使用方式: {prefix}add-keyword\n[觸發句]\n[回覆句]")
